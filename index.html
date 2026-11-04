@@ -1,5 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>HLB GI Renewal &middot; Magma Flow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -765,9 +766,11 @@ html.ko .ty-name{font-size:calc(var(--L)*.8);font-weight:600;-webkit-text-stroke
 .hm-caps .hlbm-cap{margin:clamp(40px,4.4vw,64px) auto 0;font-size:clamp(15px,1.2vw,18px);font-weight:700;line-height:1.6;max-width:760px;text-align:center}
 @media (max-width:760px){.hmc p{display:none}}
 @media(min-width:700px){#split .sx-t.sx-r[data-k="t"],#magma .sx-t.sx-r[data-k="t"]{white-space:nowrap!important;max-width:none}}
+
+@media (max-width:760px){.gnav-in{gap:10px}.gnav ul li:not(.keep){display:list-item}.gnav ul{flex:1 1 auto;min-width:0;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:14px;mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 18px),transparent);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 18px),transparent);padding:0 14px 0 6px}.gnav ul::-webkit-scrollbar{display:none}.gnav .mark{width:44px}.lang-sw button{padding:4px 8px}.mw-pair{max-width:100%!important}}
 </style>
 
-<nav class="gnav" aria-label="챕터">
+<nav class="gnav" aria-label="Chapters">
   <div class="gnav-in">
     <a href="#prologue" class="mark" aria-label="HLB" data-logo onclick="event.preventDefault();window.scrollTo({top:0,behavior:'instant'})"></a>
     <ul>
@@ -1364,9 +1367,9 @@ requestAnimationFrame(frame);
   const map=(x,y)=>[.5+(x/1920-.5)*1.07+.029, .5825+(y/1200-.5825)*1.07+.0067], f=v=>v.toFixed(1);
   tx.classList.add("call"); ph2.setAttribute("d","M0 0");
   const lay=()=>{ const w=ab.clientWidth,h=ab.clientHeight; if(!w) return; s.setAttribute("viewBox",`0 0 ${w} ${h}`);
-    const fs=Math.max(15,Math.min(h*.04,w*.026)); tx.style.setProperty("font-size",fs+"px","important");
+    const fs=Math.max(w<520?12:15,Math.min(h*.04,w*.026)); tx.style.setProperty("font-size",fs+"px","important");
     const tw=tx.scrollWidth, th=tx.offsetHeight, [dx,dy]=map(905,668), D=[dx*w,dy*h], ky=Math.max(th+h*.06,D[1]-h*.24), run=(D[1]-ky)*.62, gap=fs*.35;
-    let kx=D[0]+run, right=kx+tw+gap*2<=w*.965; if(!right) kx=D[0]-run;
+    let kx=D[0]+run, right=kx+tw+gap*2<=w*.965; if(!right){ kx=D[0]-run; if(kx-tw-gap*2<w*.035){ right=true; kx=Math.max(w*.035,w*.965-tw-gap*2) } }
     const ex=right?kx+tw+gap*2:kx-tw-gap*2;
     pd.setAttribute("d",`M${f(D[0])} ${f(D[1])}L${f(kx)} ${f(ky)}`); ph1.setAttribute("d",`M${f(kx)} ${f(ky)}H${f(ex)}`);
     tx.style.setProperty("left",(right?kx+gap:ex+gap)+"px","important"); tx.style.setProperty("top",(ky-th-fs*.22)+"px","important"); tx.style.textAlign=right?"left":"right";
@@ -1382,5 +1385,6 @@ requestAnimationFrame(frame);
   addEventListener("load",fit); addEventListener("resize",fit); new ResizeObserver(fit).observe(st); setTimeout(fit,600);
 })();
 </script>
+<script>(()=>{ const ul=document.querySelector(".gnav ul"); if(!ul) return; let last=null; setInterval(()=>{ if(innerWidth>760) return; const a=ul.querySelector("a.on"); if(a&&a!==last){ last=a; ul.scrollTo({left:a.offsetLeft-ul.clientWidth/2+a.offsetWidth/2,behavior:"smooth"}) } },400) })();</script>
 
 </body></html>
